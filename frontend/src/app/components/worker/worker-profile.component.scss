@@ -1,0 +1,28 @@
+.profile-layout { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: start; }
+.profile-preview { position: sticky; top: 80px; }
+.pp-card { background: #fff; border-radius: 16px; padding: 1.8rem; text-align: center; box-shadow: 0 2px 12px rgba(27,58,92,.07); border: 1.5px solid #E5E7EB; }
+.pp-avatar { width: 72px; height: 72px; border-radius: 50%; background: #1B3A5C; color: #fff; font-size: 28px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+.pp-name { font-size: 1.1rem; font-weight: 700; color: #1B3A5C; margin-bottom: 4px; }
+.pp-loc { font-size: 13px; color: #6B7280; margin-bottom: 8px; }
+.pp-avail { margin: 8px auto; display: inline-block; }
+.pp-rate { font-size: 1rem; font-weight: 700; color: #1B3A5C; margin: 8px 0; }
+.pp-skills { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin: 10px 0; }
+.skill-tag { background: #F4F7FB; border: 1px solid #E5E7EB; color: #1B3A5C; padding: 3px 8px; border-radius: 20px; font-size: 11px; }
+.pp-stats { display: flex; justify-content: center; gap: 1.5rem; margin-top: 12px; font-size: 13px; color: #6B7280; span { font-weight: 800; color: #1B3A5C; font-size: 1.1rem; display: block; } }
+.form-card { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(27,58,92,.05); margin-bottom: 1.2rem; }
+.section-title { font-size: .95rem; font-weight: 700; color: #1B3A5C; margin-bottom: 1.2rem; padding-bottom: 8px; border-bottom: 1px solid #E5E7EB; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.skills-input-wrap { display: flex; gap: 8px; margin-bottom: 10px; }
+.skills-input-wrap .form-control { flex: 1; }
+.add-skill-btn { padding: 10px 16px; background: #1B3A5C; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; line-height: 1; }
+.skills-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.skill-chip { display: inline-flex; align-items: center; gap: 4px; background: #EBF4FF; color: #1B3A5C; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; button { background: none; border: none; cursor: pointer; color: #6B7280; padding: 0; font-size: 14px; } }
+.skill-suggestions { display: flex; flex-wrap: wrap; gap: 6px; }
+.sugg-tag { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; background: #F4F7FB; border: 1px solid #E5E7EB; color: #1B3A5C; transition: all .2s; }
+.sugg-tag:hover, .sugg-tag.added { background: #1B3A5C; color: #fff; border-color: #1B3A5C; }
+.btn-save { padding: 13px 32px; background: #1A9E8F; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: inherit; transition: background .2s; }
+.btn-save:hover { background: #148f81; }
+.btn-save:disabled { opacity: .7; cursor: not-allowed; }
+.spinner-sm { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media(max-width:900px) { .profile-layout { grid-template-columns: 1fr; } .profile-preview { position: static; } .form-row { grid-template-columns: 1fr; } }

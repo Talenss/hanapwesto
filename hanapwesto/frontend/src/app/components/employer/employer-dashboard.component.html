@@ -1,0 +1,54 @@
+<div class="page-container">
+  <div class="welcome-banner">
+    <div class="wb-left">
+      <div class="wb-avatar">{{ user?.name?.charAt(0) }}</div>
+      <div>
+        <h1>{{ user?.businessName || user?.name }}</h1>
+        <p>📍 {{ user?.barangay }} · Employer Account</p>
+      </div>
+    </div>
+    <a routerLink="/employer/post-job" class="btn-post-job">+ Post New Job</a>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="sc-icon">📋</div><div class="sc-num">{{ myJobs.length }}</div><div class="sc-label">Total Jobs Posted</div></div>
+    <div class="stat-card accent"><div class="sc-icon">🟢</div><div class="sc-num">{{ openJobs }}</div><div class="sc-label">Open Jobs</div></div>
+    <div class="stat-card gold"><div class="sc-icon">👥</div><div class="sc-num">{{ totalApplicants }}</div><div class="sc-label">Total Applicants</div></div>
+    <div class="stat-card"><div class="sc-icon">✅</div><div class="sc-num">{{ filledJobs }}</div><div class="sc-label">Filled Positions</div></div>
+  </div>
+
+  <div class="quick-actions">
+    <a routerLink="/employer/post-job" class="qa-card"><span class="qa-icon">➕</span><span>Post a Job</span></a>
+    <a routerLink="/employer/jobs" class="qa-card"><span class="qa-icon">📋</span><span>Manage Jobs</span></a>
+    <a routerLink="/workers" class="qa-card"><span class="qa-icon">🔍</span><span>Find Workers</span></a>
+    <a routerLink="/employer/profile" class="qa-card"><span class="qa-icon">✏️</span><span>Edit Profile</span></a>
+  </div>
+
+  <div class="jobs-section">
+    <div class="dash-sec-header">
+      <h2>My Jobs</h2>
+      <a routerLink="/employer/jobs">Manage all →</a>
+    </div>
+    <div class="spinner" *ngIf="loading"></div>
+    <div class="empty-state" *ngIf="!loading && myJobs.length === 0">
+      <span class="material-icons">work_off</span>
+      <p>You haven't posted any jobs yet.</p>
+      <a routerLink="/employer/post-job" class="btn btn-accent" style="margin-top:12px">Post Your First Job</a>
+    </div>
+    <div class="jobs-table" *ngIf="!loading && myJobs.length">
+      <div class="jt-header">
+        <span>Job Title</span><span>Category</span><span>Pay</span><span>Applicants</span><span>Status</span><span>Actions</span>
+      </div>
+      <div class="jt-row" *ngFor="let job of myJobs">
+        <span class="jt-title">{{ job.title }}</span>
+        <span class="badge badge-gray">{{ job.category | titlecase }}</span>
+        <span class="jt-pay">₱{{ job.payAmount }}/{{ job.payType }}</span>
+        <span>👥 {{ job.applicants?.length || 0 }}</span>
+        <span class="jt-status" [class]="'status-' + job.status">{{ job.status | titlecase }}</span>
+        <div class="jt-actions">
+          <a [routerLink]="'/employer/applications/' + job._id" class="btn btn-accent btn-sm">View Applicants</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

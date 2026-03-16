@@ -1,0 +1,106 @@
+<div class="page-container">
+  <div class="post-layout">
+    <div class="post-main">
+      <div class="page-header">
+        <h1>Post a New Job</h1>
+        <p>Fill in the details below to find the right worker for your needs</p>
+      </div>
+
+      <div class="form-card">
+        <h3 class="section-title">Job Details</h3>
+        <div class="form-group">
+          <label class="form-label">Job Title *</label>
+          <input type="text" class="form-control" [(ngModel)]="form.title" placeholder="e.g. House Cleaning Helper, Farm Worker, Carpenter">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select class="form-control" [(ngModel)]="form.category">
+              <option value="">Select category</option>
+              <option *ngFor="let c of categories" [value]="c.value">{{ c.label }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location / Barangay *</label>
+            <select class="form-control" [(ngModel)]="form.barangay">
+              <option value="">Select barangay</option>
+              <option *ngFor="let b of barangays" [value]="b">{{ b }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Job Description *</label>
+          <textarea class="form-control" [(ngModel)]="form.description" rows="5" placeholder="Describe the tasks, responsibilities, and any requirements..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 class="section-title">Pay & Duration</h3>
+        <div class="form-row-3">
+          <div class="form-group">
+            <label class="form-label">Pay Type *</label>
+            <select class="form-control" [(ngModel)]="form.payType">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="fixed">Fixed Rate</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pay Amount (₱) *</label>
+            <input type="number" class="form-control" [(ngModel)]="form.payAmount" min="0" placeholder="e.g. 600">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of Slots</label>
+            <input type="number" class="form-control" [(ngModel)]="form.slots" min="1" max="20">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Duration *</label>
+            <input type="text" class="form-control" [(ngModel)]="form.duration" placeholder="e.g. 1 week, 3 days, 1 month">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Start Date (optional)</label>
+            <input type="date" class="form-control" [(ngModel)]="form.startDate">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 class="section-title">Skills Needed (optional)</h3>
+        <div class="skills-input-wrap">
+          <input type="text" class="form-control" [(ngModel)]="skillInput" placeholder="Add required skill..." (keydown.enter)="addSkill();$event.preventDefault()">
+          <button type="button" class="add-skill-btn" (click)="addSkill()">+</button>
+        </div>
+        <div class="skills-list" *ngIf="form.skillsRequired.length">
+          <span class="skill-chip" *ngFor="let s of form.skillsRequired; let i=index">
+            {{ s }} <button type="button" (click)="removeSkill(i)">×</button>
+          </span>
+        </div>
+        <div class="skill-suggestions">
+          <span *ngFor="let s of skillSuggestions" class="sugg-tag" (click)="addSuggested(s)" [class.added]="form.skillsRequired.includes(s)">+ {{ s }}</span>
+        </div>
+      </div>
+
+      <div class="post-actions">
+        <a routerLink="/employer/jobs" class="btn btn-outline">Cancel</a>
+        <button class="btn-post" (click)="submit()" [disabled]="saving">
+          <span *ngIf="saving" class="spinner-sm"></span>
+          {{ saving ? 'Posting...' : '📢 Post Job' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <aside class="post-tips">
+      <div class="tips-card">
+        <h3>💡 Tips for a Good Listing</h3>
+        <div class="tip-item" *ngFor="let t of tips">
+          <span class="tip-check">✓</span>
+          <p>{{ t }}</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="page-container" *ngIf="!loading && job">
+  <div class="detail-layout">
+    <!-- Main -->
+    <div class="detail-main">
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="cat-icon-big">{{ getCategoryEmoji(job.category) }}</div>
+          <div class="detail-title-area">
+            <div class="detail-badges">
+              <span class="badge badge-success">Open</span>
+              <span class="badge badge-gray">{{ job.category | titlecase }}</span>
+            </div>
+            <h1>{{ job.title }}</h1>
+            <div class="detail-meta">
+              <span>📍 {{ job.barangay }}, {{ job.municipality }}</span>
+              <span>⏱ {{ job.duration }}</span>
+              <span>👁 {{ job.views }} views</span>
+              <span>📅 {{ job.createdAt | date:'MMMM d, y' }}</span>
+            </div>
+          </div>
+          <div class="detail-pay">
+            <div class="pay-amount">₱{{ job.payAmount | number }}</div>
+            <div class="pay-type">per {{ job.payType }}</div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Job Description</h3>
+          <p class="detail-desc">{{ job.description }}</p>
+        </div>
+
+        <div class="detail-section" *ngIf="job.skillsRequired?.length">
+          <h3>Skills Required</h3>
+          <div class="skills-row">
+            <span class="skill-tag" *ngFor="let s of job.skillsRequired">{{ s }}</span>
+          </div>
+        </div>
+
+        <div class="detail-info-grid">
+          <div class="info-box">
+            <div class="info-label">Pay Type</div>
+            <div class="info-val">{{ job.payType | titlecase }}</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Duration</div>
+            <div class="info-val">{{ job.duration }}</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Slots Available</div>
+            <div class="info-val">{{ job.slots }}</div>
+          </div>
+          <div class="info-box" *ngIf="job.startDate">
+            <div class="info-label">Start Date</div>
+            <div class="info-val">{{ job.startDate | date:'MMM d, y' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="detail-sidebar">
+      <!-- Apply Card -->
+      <div class="apply-card">
+        <div class="apply-pay">₱{{ job.payAmount | number }}<span>/{{ job.payType }}</span></div>
+        <ng-container *ngIf="auth.isWorker">
+          <button class="btn-apply" (click)="showApplyModal=true">Apply for this Job</button>
+        </ng-container>
+        <ng-container *ngIf="!auth.isLoggedIn">
+          <a routerLink="/login" class="btn-apply">Login to Apply</a>
+        </ng-container>
+        <ng-container *ngIf="auth.isEmployer">
+          <div class="employer-note">You are logged in as an employer.</div>
+        </ng-container>
+        <div class="apply-slots">{{ job.slots }} slot{{ job.slots > 1 ? 's' : '' }} available</div>
+      </div>
+
+      <!-- Employer Card -->
+      <div class="employer-card" *ngIf="getEmployer() as emp">
+        <h3>Posted by</h3>
+        <div class="emp-profile">
+          <div class="emp-avatar">{{ getInitial(emp.name) }}</div>
+          <div>
+            <div class="emp-name">{{ emp.businessName || emp.name }}</div>
+            <div class="emp-loc">📍 {{ emp.barangay }}</div>
+          </div>
+        </div>
+        <div class="emp-rating" *ngIf="emp.averageRating">
+          <span class="stars">{{ getStars(emp.averageRating).join('') }}</span>
+          <span class="rating-text">{{ emp.averageRating }} ({{ emp.totalRatings }} ratings)</span>
+        </div>
+        <a [routerLink]="'/profile/'+emp._id" class="view-profile-btn">View Full Profile</a>
+      </div>
+
+      <!-- Location Card -->
+      <div class="loc-card">
+        <h3>Location</h3>
+        <div class="loc-text">📍 {{ job.barangay }}, {{ job.municipality }}</div>
+        <div class="loc-note">Exact address shared after hiring</div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="spinner" *ngIf="loading"></div>
+
+<!-- Apply Modal -->
+<div class="modal-overlay" *ngIf="showApplyModal" (click)="showApplyModal=false">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Apply for "{{ job?.title }}"</h3>
+      <button class="modal-close" (click)="showApplyModal=false">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-intro">Introduce yourself to the employer. Tell them why you're a good fit.</p>
+      <div class="form-group">
+        <label class="form-label">Message (optional)</label>
+        <textarea class="form-control" [(ngModel)]="message" rows="4" placeholder="e.g. I have 5 years experience in carpentry and am available to start immediately..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="showApplyModal=false">Cancel</button>
+      <button class="btn-apply-submit" (click)="apply()" [disabled]="applying">
+        <span *ngIf="applying" class="spinner-sm"></span>
+        {{ applying ? 'Submitting...' : 'Submit Application' }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="auth-page">
+  <div class="auth-left">
+    <div class="auth-brand">💼 Hana<span>Pwesto</span></div>
+    <h2>Join your local<br>job community</h2>
+    <p>Register for free and start finding work or hiring workers in your barangay today.</p>
+    <div class="auth-features">
+      <div class="af-item">✓ No resume required for workers</div>
+      <div class="af-item">✓ Post jobs in under 2 minutes</div>
+      <div class="af-item">✓ Trusted community ratings</div>
+      <div class="af-item">✓ 100% Free to use</div>
+    </div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-card" style="max-width:520px">
+      <h2>Create Account</h2>
+      <p class="auth-sub">Join HanaPwesto — it's free!</p>
+
+      <!-- Role Tabs -->
+      <div class="role-tabs">
+        <button class="role-tab" [class.active]="role==='worker'" (click)="role='worker'">
+          <span class="role-icon">🔨</span> I'm a Worker
+        </button>
+        <button class="role-tab" [class.active]="role==='employer'" (click)="role='employer'">
+          <span class="role-icon">🏢</span> I'm an Employer
+        </button>
+      </div>
+
+      <form (ngSubmit)="submit()">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-control" [(ngModel)]="form.name" name="name" placeholder="Juan Dela Cruz" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" [(ngModel)]="form.phone" name="phone" placeholder="09XX XXX XXXX">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input type="email" class="form-control" [(ngModel)]="form.email" name="email" placeholder="your@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password *</label>
+          <div class="pass-wrap">
+            <input [type]="showPass ? 'text' : 'password'" class="form-control" [(ngModel)]="form.password" name="password" placeholder="Min. 6 characters" required minlength="6">
+            <button type="button" class="pass-toggle" (click)="showPass=!showPass">
+              <span class="material-icons">{{showPass ? 'visibility_off' : 'visibility'}}</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Barangay *</label>
+          <select class="form-control" [(ngModel)]="form.barangay" name="barangay" required>
+            <option value="">Select your barangay</option>
+            <option *ngFor="let b of barangays" [value]="b">{{b}}</option>
+          </select>
+        </div>
+
+        <!-- Employer fields -->
+        <ng-container *ngIf="role==='employer'">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Business / Household Name</label>
+              <input type="text" class="form-control" [(ngModel)]="form.businessName" name="businessName" placeholder="e.g. Santos Household">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Business Type</label>
+              <select class="form-control" [(ngModel)]="form.businessType" name="businessType">
+                <option value="">Select type</option>
+                <option value="household">Household</option>
+                <option value="small-business">Small Business</option>
+                <option value="farm">Farm / Agriculture</option>
+                <option value="construction">Construction</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Worker fields -->
+        <ng-container *ngIf="role==='worker'">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Availability</label>
+              <select class="form-control" [(ngModel)]="form.availability" name="availability">
+                <option value="flexible">Flexible</option>
+                <option value="full-time">Full-time</option>
+                <option value="part-time">Part-time</option>
+                <option value="weekends">Weekends only</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Daily Rate (₱)</label>
+              <input type="number" class="form-control" [(ngModel)]="form.dailyRate" name="dailyRate" placeholder="e.g. 500">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Your Skills</label>
+            <div class="skills-input-wrap">
+              <input type="text" class="form-control" [(ngModel)]="skillInput" name="skillInput" placeholder="e.g. Carpentry" (keydown.enter)="addSkill();$event.preventDefault()">
+              <button type="button" class="add-skill-btn" (click)="addSkill()">+</button>
+            </div>
+            <div class="skills-list" *ngIf="form.skills.length">
+              <span class="skill-chip" *ngFor="let s of form.skills; let i=index">
+                {{s}} <button type="button" (click)="removeSkill(i)">×</button>
+              </span>
+            </div>
+            <div class="skill-suggestions">
+              <span *ngFor="let s of skillSuggestions" class="sugg-tag" (click)="addSuggested(s)" [class.added]="form.skills.includes(s)">
+                + {{s}}
+              </span>
+            </div>
+          </div>
+        </ng-container>
+
+        <button type="submit" class="btn-submit" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-sm"></span>
+          {{ loading ? 'Creating account...' : 'Create Free Account' }}
+        </button>
+      </form>
+      <p class="auth-switch">Already have an account? <a routerLink="/login">Login here</a></p>
+    </div>
+  </div>
+</div>

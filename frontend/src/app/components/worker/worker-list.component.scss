@@ -1,0 +1,24 @@
+.workers-page { display:grid; grid-template-columns:240px 1fr; gap:2rem; max-width:1200px; margin:0 auto; padding:2rem 1rem; align-items:start; }
+.filters { background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 12px rgba(27,58,92,.07); position:sticky; top:80px; h3 { font-size:1rem; font-weight:700; color:#1B3A5C; margin-bottom:1.2rem; } }
+.workers-main { min-width:0; }
+.workers-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:1.5rem; h1 { font-size:1.6rem; font-weight:800; color:#1B3A5C; } p { color:#6B7280; font-size:14px; } }
+.workers-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; }
+.worker-card { background:#fff; border-radius:14px; padding:1.3rem; border:1.5px solid #E5E7EB; text-decoration:none; color:#1a1a2e; transition:all .25s; display:flex; flex-direction:column; gap:10px; }
+.worker-card:hover { border-color:#1A9E8F; box-shadow:0 6px 20px rgba(26,158,143,.12); transform:translateY(-2px); text-decoration:none; }
+.wc-top { display:flex; align-items:center; gap:10px; }
+.wc-avatar { width:44px; height:44px; border-radius:50%; background:#1B3A5C; color:#fff; font-size:18px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.wc-info { flex:1; }
+.wc-name { font-size:1rem; font-weight:700; color:#1B3A5C; }
+.wc-loc { font-size:12px; color:#6B7280; }
+.wc-avail { padding:3px 9px; border-radius:20px; font-size:11px; font-weight:700; }
+.avail-flexible, .avail-full-time { background:#E6F9EF; color:#27AE60; }
+.avail-part-time { background:#FEF3DC; color:#B7791F; }
+.avail-weekends { background:#EBF4FF; color:#1B3A5C; }
+.wc-rating { display:flex; align-items:center; gap:6px; font-size:12px; color:#6B7280; }
+.stars { color:#F5A623; }
+.wc-skills { display:flex; flex-wrap:wrap; gap:5px; }
+.skill-tag { background:#F4F7FB; border:1px solid #E5E7EB; color:#1B3A5C; padding:2px 8px; border-radius:20px; font-size:11px; }
+.wc-footer { display:flex; justify-content:space-between; align-items:center; padding-top:8px; border-top:1px solid #F3F4F6; }
+.wc-rate { font-size:13px; font-weight:800; color:#1B3A5C; }
+.wc-jobs { font-size:12px; color:#6B7280; }
+@media(max-width:900px) { .workers-page { grid-template-columns:1fr; } .filters { position:static; } .workers-grid { grid-template-columns:1fr; } }

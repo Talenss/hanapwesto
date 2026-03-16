@@ -1,0 +1,53 @@
+.welcome-banner { background: linear-gradient(135deg, #1B3A5C, #2E6DA4); border-radius: 16px; padding: 1.8rem 2rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.wb-left { display: flex; align-items: center; gap: 1rem; }
+.wb-avatar { width: 56px; height: 56px; border-radius: 50%; background: #1A9E8F; color: #fff; font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.wb-left h1 { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+.wb-left p { color: rgba(255,255,255,.7); font-size: 13px; }
+.wb-right { text-align: right; }
+.star-gold { color: #F5A623; font-size: 1.1rem; }
+.wb-rating { color: rgba(255,255,255,.85); font-size: 13px; margin-bottom: 4px; }
+.wb-jobs { color: rgba(255,255,255,.6); font-size: 12px; }
+
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-card { background: #fff; border-radius: 14px; padding: 1.3rem; text-align: center; border: 1.5px solid #E5E7EB; box-shadow: 0 2px 8px rgba(27,58,92,.05); }
+.stat-card.accent { border-color: #1A9E8F; background: #f0fdf9; }
+.stat-card.gold { border-color: #F5A623; background: #fffbf0; }
+.sc-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.sc-num { font-size: 2rem; font-weight: 900; color: #1B3A5C; }
+.sc-label { font-size: 12px; color: #6B7280; margin-top: 2px; }
+
+.quick-actions { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 2rem; }
+.qa-card { background: #fff; border-radius: 12px; padding: 1.2rem; text-align: center; text-decoration: none; color: #1B3A5C; border: 1.5px solid #E5E7EB; transition: all .25s; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.qa-card:hover { background: #1B3A5C; color: #fff; border-color: #1B3A5C; transform: translateY(-2px); text-decoration: none; }
+.qa-icon { font-size: 1.8rem; }
+.qa-card span:last-child { font-size: 13px; font-weight: 600; }
+
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.dash-section { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(27,58,92,.05); }
+.dash-sec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; h2 { font-size: 1rem; font-weight: 700; color: #1B3A5C; } a { font-size: 13px; color: #1A9E8F; text-decoration: none; font-weight: 600; } }
+.nearby-jobs { display: flex; flex-direction: column; gap: 8px; }
+.nearby-job { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; text-decoration: none; color: #1a1a2e; border: 1px solid #F3F4F6; transition: all .2s; }
+.nearby-job:hover { background: #F4F7FB; border-color: #1A9E8F; text-decoration: none; }
+.nj-icon { font-size: 1.5rem; flex-shrink: 0; }
+.nj-info { flex: 1; min-width: 0; }
+.nj-title { font-size: 13px; font-weight: 700; color: #1B3A5C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nj-meta { font-size: 11px; color: #6B7280; margin-top: 2px; }
+.nj-pay { font-size: 13px; font-weight: 800; color: #1B3A5C; white-space: nowrap; }
+.app-list { display: flex; flex-direction: column; gap: 8px; }
+.app-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: #F9FAFB; border-radius: 10px; gap: 10px; }
+.app-title { font-size: 13px; font-weight: 600; color: #1B3A5C; }
+.app-employer { font-size: 11px; color: #6B7280; margin-top: 2px; }
+.app-status { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.status-pending { background: #FEF3DC; color: #B7791F; }
+.status-accepted { background: #E6F9EF; color: #27AE60; }
+.status-rejected { background: #FEECEC; color: #E74C3C; }
+.status-completed { background: #EBF4FF; color: #1B3A5C; }
+.status-cancelled { background: #F3F4F6; color: #6B7280; }
+
+.profile-tip { display: flex; align-items: center; gap: 1rem; background: #EBF4FF; border: 1.5px solid #BFDBFE; border-radius: 14px; padding: 1.2rem 1.5rem; }
+.tip-icon { font-size: 1.5rem; flex-shrink: 0; }
+.profile-tip strong { font-size: 14px; color: #1B3A5C; display: block; margin-bottom: 2px; }
+.profile-tip p { font-size: 13px; color: #6B7280; }
+.profile-tip a { margin-left: auto; white-space: nowrap; }
+
+@media(max-width:768px) { .stats-row, .quick-actions { grid-template-columns: repeat(2,1fr); } .dash-grid { grid-template-columns: 1fr; } }

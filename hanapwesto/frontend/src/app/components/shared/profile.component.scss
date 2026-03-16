@@ -1,0 +1,24 @@
+.profile-layout { display:grid; grid-template-columns:280px 1fr; gap:2rem; align-items:start; }
+.profile-card { background:#fff; border-radius:16px; padding:2rem; text-align:center; box-shadow:0 2px 12px rgba(27,58,92,.07); position:sticky; top:80px; }
+.pc-avatar { width:80px; height:80px; border-radius:50%; background:#1B3A5C; color:#fff; font-size:32px; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; }
+.pc-name { font-size:1.3rem; font-weight:800; color:#1B3A5C; margin-bottom:8px; }
+.pc-role { margin-bottom:10px; display:inline-block; }
+.pc-loc { font-size:13px; color:#6B7280; margin-bottom:10px; }
+.pc-rating { display:flex; align-items:center; justify-content:center; gap:6px; font-size:13px; color:#6B7280; margin-bottom:12px; }
+.stars { color:#F5A623; font-size:1.1rem; }
+.pc-stats { display:flex; justify-content:center; gap:2rem; margin:12px 0; }
+.pc-stat { text-align:center; font-size:13px; color:#6B7280; span { font-size:1.4rem; font-weight:800; color:#1B3A5C; display:block; } }
+.pc-avail, .pc-rate { font-size:13px; color:#6B7280; margin-top:6px; strong { color:#1B3A5C; } }
+.profile-details { display:flex; flex-direction:column; gap:1.2rem; }
+.detail-card { background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 8px rgba(27,58,92,.05); h3 { font-size:1rem; font-weight:700; color:#1B3A5C; margin-bottom:1rem; padding-bottom:8px; border-bottom:1px solid #E5E7EB; } p { font-size:14px; color:#374151; line-height:1.7; } }
+.skills-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.skill-tag { background:#F4F7FB; border:1px solid #E5E7EB; color:#1B3A5C; padding:5px 12px; border-radius:20px; font-size:13px; }
+.ratings-list { display:flex; flex-direction:column; gap:1rem; }
+.rating-item { padding:1rem; background:#F9FAFB; border-radius:10px; }
+.ri-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.ri-avatar { width:36px; height:36px; border-radius:50%; background:#1A9E8F; color:#fff; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ri-name { font-size:14px; font-weight:600; color:#1B3A5C; }
+.ri-date { font-size:11px; color:#9CA3AF; }
+.ri-stars { color:#F5A623; margin-left:auto; font-size:1rem; }
+.ri-comment { font-size:13px; color:#6B7280; font-style:italic; }
+@media(max-width:900px) { .profile-layout { grid-template-columns:1fr; } .profile-card { position:static; } }

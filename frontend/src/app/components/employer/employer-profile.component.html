@@ -1,0 +1,60 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Edit My Profile</h1>
+    <p>Update your employer information</p>
+  </div>
+  <div class="profile-layout">
+    <div class="preview-card">
+      <div class="pp-avatar">{{ user?.name?.charAt(0) }}</div>
+      <div class="pp-name">{{ form.businessName || user?.name }}</div>
+      <div class="pp-loc">📍 {{ form.barangay || user?.barangay }}</div>
+      <div class="badge badge-primary" style="margin:8px auto;display:inline-block">Employer</div>
+      <a [routerLink]="'/profile/' + user?._id" class="btn btn-outline btn-sm" style="margin-top:1rem;width:100%;text-align:center">View Public Profile</a>
+    </div>
+    <div class="edit-form">
+      <div class="form-card">
+        <h3 class="section-title">Personal Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" [(ngModel)]="form.name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" [(ngModel)]="form.phone" placeholder="09XX XXX XXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Barangay</label>
+          <select class="form-control" [(ngModel)]="form.barangay">
+            <option *ngFor="let b of barangays" [value]="b">{{ b }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3 class="section-title">Business Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Business / Household Name</label>
+            <input type="text" class="form-control" [(ngModel)]="form.businessName" placeholder="e.g. Santos Household">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Business Type</label>
+            <select class="form-control" [(ngModel)]="form.businessType">
+              <option value="">Select type</option>
+              <option value="household">Household</option>
+              <option value="small-business">Small Business</option>
+              <option value="farm">Farm / Agriculture</option>
+              <option value="construction">Construction</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn-save" (click)="save()" [disabled]="saving">
+        <span *ngIf="saving" class="spinner-sm"></span>
+        {{ saving ? 'Saving...' : 'Save Profile' }}
+      </button>
+    </div>
+  </div>
+</div>

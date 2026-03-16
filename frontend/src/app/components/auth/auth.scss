@@ -1,0 +1,189 @@
+.auth-page {
+  display: flex;
+  min-height: calc(100vh - 64px);
+}
+.auth-left {
+  flex: 1;
+  background: linear-gradient(160deg, #1B3A5C 0%, #2E6DA4 100%);
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+}
+.auth-brand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2.5rem;
+  span { color: #F5A623; }
+}
+.auth-left h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+.auth-left p {
+  color: rgba(255,255,255,.72);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.auth-features { display: flex; flex-direction: column; gap: 10px; }
+.af-item { color: rgba(255,255,255,.85); font-size: 14px; font-weight: 500; }
+
+.auth-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #F4F7FB;
+}
+.auth-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 4px 24px rgba(27,58,92,.08);
+}
+.auth-card h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1B3A5C;
+  margin-bottom: 6px;
+}
+.auth-sub {
+  color: #6B7280;
+  margin-bottom: 2rem;
+  font-size: 14px;
+}
+.pass-wrap {
+  position: relative;
+}
+.pass-wrap .form-control {
+  padding-right: 44px;
+}
+.pass-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9CA3AF;
+  display: flex;
+}
+.pass-toggle .material-icons { font-size: 20px; }
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: #1B3A5C;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+  font-family: inherit;
+}
+.btn-submit:hover { background: #2E6DA4; }
+.btn-submit:disabled { opacity: .7; cursor: not-allowed; }
+.spinner-sm {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.auth-switch {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 14px;
+  color: #6B7280;
+  a { color: #1A9E8F; font-weight: 600; }
+}
+.role-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+.role-tab {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6B7280;
+  transition: all .2s;
+  background: #fff;
+  font-family: inherit;
+}
+.role-tab.active {
+  border-color: #1B3A5C;
+  background: #1B3A5C;
+  color: #fff;
+}
+.role-tab .role-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.skills-input-wrap { display: flex; gap: 8px; }
+.skills-input-wrap .form-control { flex: 1; }
+.add-skill-btn {
+  padding: 10px 14px;
+  background: #1B3A5C;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+.skills-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #EBF4FF;
+  color: #1B3A5C;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.skill-chip button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6B7280;
+  padding: 0;
+  line-height: 1;
+  font-size: 14px;
+}
+
+@media(max-width:768px) {
+  .auth-page { flex-direction: column; }
+  .auth-left { padding: 2.5rem 1.5rem; }
+  .auth-left h2 { font-size: 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.skill-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.sugg-tag { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; background: #F4F7FB; border: 1px solid #E5E7EB; color: #1B3A5C; transition: all .2s; }
+.sugg-tag:hover, .sugg-tag.added { background: #1B3A5C; color: #fff; border-color: #1B3A5C; }

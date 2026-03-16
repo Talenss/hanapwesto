@@ -1,0 +1,25 @@
+<div class="page-container">
+  <div class="notif-header">
+    <div>
+      <h1>Notifications</h1>
+      <p *ngIf="unreadCount > 0">{{ unreadCount }} unread notification{{ unreadCount > 1 ? 's' : '' }}</p>
+    </div>
+    <button class="btn btn-outline btn-sm" *ngIf="unreadCount > 0" (click)="markAllRead()">Mark all as read</button>
+  </div>
+  <div class="spinner" *ngIf="loading"></div>
+  <div class="empty-state" *ngIf="!loading && notifications.length === 0">
+    <span class="material-icons">notifications_none</span>
+    <p>No notifications yet. Apply for jobs to get started!</p>
+  </div>
+  <div class="notif-list" *ngIf="!loading && notifications.length">
+    <div class="notif-item" *ngFor="let n of notifications" [class.unread]="!n.isRead" (click)="markRead(n)">
+      <div class="notif-icon">{{ getIcon(n.type) }}</div>
+      <div class="notif-content">
+        <div class="notif-title">{{ n.title }}</div>
+        <div class="notif-msg">{{ n.message }}</div>
+        <div class="notif-time">{{ n.createdAt | date:'MMM d, y · h:mm a' }}</div>
+      </div>
+      <div class="unread-dot" *ngIf="!n.isRead"></div>
+    </div>
+  </div>
+</div>

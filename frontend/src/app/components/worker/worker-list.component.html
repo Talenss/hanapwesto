@@ -1,0 +1,64 @@
+<div class="workers-page">
+  <aside class="filters">
+    <h3>Filter Workers</h3>
+    <div class="form-group">
+      <label class="form-label">Barangay</label>
+      <select class="form-control" [(ngModel)]="filters.barangay" (change)="load()">
+        <option value="">All Areas</option>
+        <option *ngFor="let b of barangays" [value]="b">{{ b }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Skill</label>
+      <select class="form-control" [(ngModel)]="filters.skill" (change)="load()">
+        <option value="">Any Skill</option>
+        <option *ngFor="let s of skills" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Availability</label>
+      <select class="form-control" [(ngModel)]="filters.availability" (change)="load()">
+        <option value="">Any</option>
+        <option value="full-time">Full-time</option>
+        <option value="part-time">Part-time</option>
+        <option value="weekends">Weekends</option>
+        <option value="flexible">Flexible</option>
+      </select>
+    </div>
+    <button class="btn btn-outline" style="width:100%" (click)="reset()">Reset</button>
+  </aside>
+  <main class="workers-main">
+    <div class="workers-header">
+      <h1>Find Workers</h1>
+      <p *ngIf="!loading">{{ total }} worker{{ total !== 1 ? 's' : '' }} found</p>
+    </div>
+    <div class="spinner" *ngIf="loading"></div>
+    <div class="empty-state" *ngIf="!loading && workers.length === 0">
+      <span class="material-icons">person_off</span>
+      <p>No workers found matching your filters.</p>
+    </div>
+    <div class="workers-grid" *ngIf="!loading && workers.length">
+      <a class="worker-card" *ngFor="let w of workers" [routerLink]="'/profile/' + w._id">
+        <div class="wc-top">
+          <div class="wc-avatar">{{ getInitial(w.name) }}</div>
+          <div class="wc-info">
+            <div class="wc-name">{{ w.name }}</div>
+            <div class="wc-loc">📍 {{ w.barangay }}</div>
+          </div>
+          <div class="wc-avail" [class]="'avail-' + w.availability">{{ w.availability }}</div>
+        </div>
+        <div class="wc-rating" *ngIf="w.averageRating">
+          <span class="stars">{{ getStars(w.averageRating) }}</span>
+          <span>{{ w.averageRating }} · {{ w.totalRatings }} ratings</span>
+        </div>
+        <div class="wc-skills">
+          <span class="skill-tag" *ngFor="let s of w.skills?.slice(0,4)">{{ s }}</span>
+        </div>
+        <div class="wc-footer">
+          <span *ngIf="w.dailyRate" class="wc-rate">₱{{ w.dailyRate }}/day</span>
+          <span class="wc-jobs">{{ w.completedJobs || 0 }} jobs done</span>
+        </div>
+      </a>
+    </div>
+  </main>
+</div>

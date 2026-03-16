@@ -1,0 +1,113 @@
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🇵🇭 Pampanga's Local Job Board</div>
+    <h1>Work is <span class="hl">near.</span><br>Opportunity is <span class="hl">here.</span></h1>
+    <p class="hero-sub">HanaPwesto connects informal workers with local employers in your barangay — no resume needed, just your skills.</p>
+    <div class="hero-actions">
+      <a routerLink="/register" [queryParams]="{role:'worker'}" class="btn-hero-worker">🔨 I'm Looking for Work</a>
+      <a routerLink="/register" [queryParams]="{role:'employer'}" class="btn-hero-employer">🏠 I Need to Hire</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">500+</span><span class="stat-lbl">Barangays</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="stat-num">300K+</span><span class="stat-lbl">Workers</span></div>
+      <div class="sdiv"></div>
+      <div class="stat"><span class="stat-num">Free</span><span class="stat-lbl">Always</span></div>
+    </div>
+  </div>
+  <div class="hero-cards">
+    <div class="demo-card worker-demo">
+      <div class="dc-head">
+        <div class="dc-av">JD</div>
+        <div><div class="dc-name">Juan Dela Cruz</div><div class="dc-loc">📍 San Fernando, Pampanga</div></div>
+        <div class="avail-badge">Available</div>
+      </div>
+      <div class="tag-row"><span class="skill-tag">Carpentry</span><span class="skill-tag">Electrical</span><span class="skill-tag">Masonry</span></div>
+      <div class="dc-rate">₱600 / day</div>
+      <div class="dc-stars">⭐⭐⭐⭐⭐ <span>4.9 (23 jobs)</span></div>
+    </div>
+    <div class="demo-card job-demo">
+      <div class="open-badge">🟢 Open</div>
+      <div class="dc-title">House Renovation Worker</div>
+      <div class="dc-emp">Posted by: Santos Household</div>
+      <div class="dc-jloc">📍 Barangay Dolores, Angeles City</div>
+      <div class="dc-pay">₱700/day · 2 weeks</div>
+      <div class="tag-row"><span class="skill-tag-w">Carpentry</span><span class="skill-tag-w">Painting</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section bg-white">
+  <div class="page-container">
+    <div class="sec-hdr"><h2>How HanaPwesto Works</h2><p>Simple. Fast. Built for your community.</p></div>
+    <div class="steps-grid">
+      <div class="step-card" *ngFor="let s of steps">
+        <div class="step-num">{{s.num}}</div>
+        <div class="step-icon">{{s.icon}}</div>
+        <h3>{{s.title}}</h3>
+        <p>{{s.desc}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section bg-gray">
+  <div class="page-container">
+    <div class="sec-hdr"><h2>Browse by Job Type</h2><p>Find work that matches your skills</p></div>
+    <div class="cat-grid">
+      <a *ngFor="let c of categories" [routerLink]="'/jobs'" [queryParams]="{category:c.value}" class="cat-card">
+        <span class="cat-icon">{{c.icon}}</span>
+        <span class="cat-lbl">{{c.label}}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section bg-white">
+  <div class="page-container">
+    <div class="why-grid">
+      <div class="why-left">
+        <h2>Why HanaPwesto?</h2>
+        <p class="why-sub">Most job platforms were built for professionals with resumes. HanaPwesto was built for the real workers of Pampanga.</p>
+        <div class="why-list">
+          <div class="why-item" *ngFor="let w of whys">
+            <div class="why-check">✓</div>
+            <div><strong>{{w.title}}</strong><p>{{w.desc}}</p></div>
+          </div>
+        </div>
+        <a routerLink="/register" class="btn-cta">Join HanaPwesto — It's Free</a>
+      </div>
+      <div class="why-right">
+        <div class="stat-box" *ngFor="let s of bigStats">
+          <div class="sb-num">{{s.num}}</div>
+          <div class="sb-lbl">{{s.label}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="page-container" style="text-align:center">
+    <h2>Ready to find work near you?</h2>
+    <p>Join thousands of workers and employers in Pampanga today.</p>
+    <div class="cta-btns">
+      <a routerLink="/register" class="btn-cta">Create Free Account</a>
+      <a routerLink="/jobs" class="btn-cta-outline">Browse Jobs</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="page-container" style="text-align:center">
+    <div class="footer-brand">💼 Hana<span style="color:#F5A623">Pwesto</span></div>
+    <p style="color:rgba(255,255,255,.55);font-style:italic;margin-bottom:8px">"Work is near. Opportunity is here."</p>
+    <p style="color:rgba(255,255,255,.3);font-size:13px">© 2024 HanaPwesto — Serving Pampanga's informal workers</p>
+  </div>
+</footer>

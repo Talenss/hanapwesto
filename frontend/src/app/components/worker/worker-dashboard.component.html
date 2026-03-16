@@ -1,0 +1,120 @@
+<div class="page-container">
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <div class="wb-left">
+      <div class="wb-avatar">{{ user?.name?.charAt(0) }}</div>
+      <div>
+        <h1>Welcome back, {{ user?.name?.split(' ')[0] }}!</h1>
+        <p>📍 {{ user?.barangay }}, {{ user?.municipality }}</p>
+      </div>
+    </div>
+    <div class="wb-right">
+      <div class="wb-rating" *ngIf="user?.averageRating">
+        <span class="star-gold">{{ getStars(user!.averageRating!) }}</span>
+        <span>{{ user?.averageRating }} avg rating</span>
+      </div>
+      <div class="wb-jobs">{{ user?.completedJobs || 0 }} jobs completed</div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="sc-icon">📋</div>
+      <div class="sc-num">{{ myApplications.length }}</div>
+      <div class="sc-label">Total Applications</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-icon">⏳</div>
+      <div class="sc-num">{{ pending }}</div>
+      <div class="sc-label">Pending</div>
+    </div>
+    <div class="stat-card accent">
+      <div class="sc-icon">✅</div>
+      <div class="sc-num">{{ accepted }}</div>
+      <div class="sc-label">Accepted</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="sc-icon">🏆</div>
+      <div class="sc-num">{{ completed }}</div>
+      <div class="sc-label">Completed</div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <a routerLink="/jobs" class="qa-card">
+      <span class="qa-icon">🔍</span>
+      <span>Browse Jobs</span>
+    </a>
+    <a routerLink="/worker/applications" class="qa-card">
+      <span class="qa-icon">📋</span>
+      <span>My Applications</span>
+    </a>
+    <a routerLink="/worker/profile" class="qa-card">
+      <span class="qa-icon">✏️</span>
+      <span>Edit Profile</span>
+    </a>
+    <a routerLink="/notifications" class="qa-card">
+      <span class="qa-icon">🔔</span>
+      <span>Notifications</span>
+    </a>
+  </div>
+
+  <div class="dash-grid">
+    <!-- Nearby Jobs -->
+    <div class="dash-section">
+      <div class="dash-sec-header">
+        <h2>Jobs Near You</h2>
+        <a routerLink="/jobs" [queryParams]="{barangay: user?.barangay}">See all →</a>
+      </div>
+      <div class="spinner" *ngIf="loading"></div>
+      <div class="empty-state" *ngIf="!loading && nearbyJobs.length === 0">
+        <span class="material-icons">work_off</span>
+        <p>No nearby jobs yet. Check back soon!</p>
+      </div>
+      <div class="nearby-jobs" *ngIf="nearbyJobs.length">
+        <a class="nearby-job" *ngFor="let job of nearbyJobs" [routerLink]="'/jobs/'+job._id">
+          <div class="nj-icon">{{ getCategoryEmoji(job.category) }}</div>
+          <div class="nj-info">
+            <div class="nj-title">{{ job.title }}</div>
+            <div class="nj-meta">📍 {{ job.barangay }} · ₱{{ job.payAmount }}/{{ job.payType }}</div>
+          </div>
+          <div class="nj-pay">₱{{ job.payAmount }}</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Recent Applications -->
+    <div class="dash-section">
+      <div class="dash-sec-header">
+        <h2>Recent Applications</h2>
+        <a routerLink="/worker/applications">See all →</a>
+      </div>
+      <div class="empty-state" *ngIf="!loading && myApplications.length === 0">
+        <span class="material-icons">description</span>
+        <p>You haven't applied to any jobs yet.</p>
+        <a routerLink="/jobs" class="btn btn-accent btn-sm" style="margin-top:10px">Browse Jobs</a>
+      </div>
+      <div class="app-list" *ngIf="myApplications.length">
+        <div class="app-item" *ngFor="let app of myApplications.slice(0,5)">
+          <div class="app-info">
+            <div class="app-title">{{ app.job?.title }}</div>
+            <div class="app-employer">{{ getEmployerName(app.employer) }}</div>
+          </div>
+          <div class="app-status" [class]="'status-' + app.status">{{ app.status | titlecase }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Completion -->
+  <div class="profile-tip" *ngIf="!user?.bio || !user?.skills?.length">
+    <span class="tip-icon">💡</span>
+    <div>
+      <strong>Complete your profile to get more job offers!</strong>
+      <p>Add your skills, availability, and a short bio so employers can find you.</p>
+    </div>
+    <a routerLink="/worker/profile" class="btn btn-primary btn-sm">Complete Profile</a>
+  </div>
+</div>

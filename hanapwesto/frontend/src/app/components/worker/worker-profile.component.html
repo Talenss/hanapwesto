@@ -1,0 +1,98 @@
+<div class="page-container">
+  <div class="profile-layout">
+    <!-- Preview card -->
+    <div class="profile-preview">
+      <div class="pp-card">
+        <div class="pp-avatar">{{ user?.name?.charAt(0) }}</div>
+        <div class="pp-name">{{ form.name || user?.name }}</div>
+        <div class="pp-loc">📍 {{ form.barangay || user?.barangay }}</div>
+        <div class="pp-avail badge badge-accent">{{ form.availability || 'flexible' | titlecase }}</div>
+        <div class="pp-rate" *ngIf="form.dailyRate">₱{{ form.dailyRate }}/day</div>
+        <div class="pp-skills">
+          <span class="skill-tag" *ngFor="let s of form.skills">{{ s }}</span>
+        </div>
+        <div class="pp-stats">
+          <div><span>{{ user?.completedJobs || 0 }}</span> jobs</div>
+          <div><span>{{ user?.averageRating || 0 }}</span> rating</div>
+        </div>
+      </div>
+      <a [routerLink]="'/profile/' + user?._id" class="btn btn-outline btn-sm" style="margin-top:1rem;width:100%;text-align:center">View Public Profile</a>
+    </div>
+
+    <!-- Edit form -->
+    <div class="edit-form">
+      <div class="page-header">
+        <h1>Edit My Profile</h1>
+        <p>Keep your profile updated to attract more employers</p>
+      </div>
+
+      <div class="form-card">
+        <h3 class="section-title">Personal Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" [(ngModel)]="form.name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" [(ngModel)]="form.phone" placeholder="09XX XXX XXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Barangay</label>
+          <select class="form-control" [(ngModel)]="form.barangay">
+            <option *ngFor="let b of barangays" [value]="b">{{ b }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bio / About Me</label>
+          <textarea class="form-control" [(ngModel)]="form.bio" rows="3" placeholder="Tell employers about yourself, your work ethic, and experience..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Work Experience</label>
+          <textarea class="form-control" [(ngModel)]="form.experience" rows="2" placeholder="e.g. 5 years carpentry experience, worked in Angeles City and San Fernando..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 class="section-title">Work Preferences</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Availability</label>
+            <select class="form-control" [(ngModel)]="form.availability">
+              <option value="flexible">Flexible</option>
+              <option value="full-time">Full-time</option>
+              <option value="part-time">Part-time</option>
+              <option value="weekends">Weekends only</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Daily Rate (₱)</label>
+            <input type="number" class="form-control" [(ngModel)]="form.dailyRate" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 class="section-title">Skills</h3>
+        <div class="skills-input-wrap">
+          <input type="text" class="form-control" [(ngModel)]="skillInput" placeholder="Add a skill..." (keydown.enter)="addSkill();$event.preventDefault()">
+          <button type="button" class="add-skill-btn" (click)="addSkill()">+</button>
+        </div>
+        <div class="skills-list" *ngIf="form.skills?.length">
+          <span class="skill-chip" *ngFor="let s of form.skills; let i=index">
+            {{ s }} <button type="button" (click)="removeSkill(i)">×</button>
+          </span>
+        </div>
+        <div class="skill-suggestions">
+          <span *ngFor="let s of skillSuggestions" class="sugg-tag" (click)="addSuggested(s)" [class.added]="form.skills.includes(s)">+ {{ s }}</span>
+        </div>
+      </div>
+
+      <button class="btn-save" (click)="save()" [disabled]="saving">
+        <span *ngIf="saving" class="spinner-sm"></span>
+        {{ saving ? 'Saving...' : 'Save Profile' }}
+      </button>
+    </div>
+  </div>
+</div>

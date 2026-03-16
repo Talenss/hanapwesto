@@ -1,0 +1,52 @@
+<div class="page-container">
+  <div class="page-header" style="display:flex;justify-content:space-between;align-items:center">
+    <div><h1>My Job Listings</h1><p>Manage your posted jobs</p></div>
+    <a routerLink="/employer/post-job" class="btn btn-accent">+ Post New Job</a>
+  </div>
+  <div class="spinner" *ngIf="loading"></div>
+  <div class="empty-state" *ngIf="!loading && jobs.length === 0">
+    <span class="material-icons">work_off</span>
+    <p>No jobs posted yet.</p>
+    <a routerLink="/employer/post-job" class="btn btn-accent" style="margin-top:12px">Post Your First Job</a>
+  </div>
+  <div class="jobs-list" *ngIf="!loading && jobs.length">
+    <div class="job-manage-card" *ngFor="let job of jobs">
+      <div class="jmc-header">
+        <div class="jmc-title-area">
+          <h3>{{ job.title }}</h3>
+          <div class="jmc-meta">
+            <span class="badge badge-gray">{{ job.category | titlecase }}</span>
+            <span>📍 {{ job.barangay }}</span>
+            <span>₱{{ job.payAmount }}/{{ job.payType }}</span>
+            <span>{{ job.createdAt | date:'MMM d, y' }}</span>
+          </div>
+        </div>
+        <div class="jmc-status" [class]="'status-' + job.status">{{ job.status | titlecase }}</div>
+      </div>
+      <div class="jmc-stats">
+        <div class="jmc-stat"><span>👥</span> {{ job.applicants?.length || 0 }} Applicants</div>
+        <div class="jmc-stat"><span>👁</span> {{ job.views }} Views</div>
+        <div class="jmc-stat"><span>🎯</span> {{ job.slots }} Slots</div>
+      </div>
+      <div class="jmc-actions">
+        <a [routerLink]="'/employer/applications/' + job._id" class="btn btn-accent btn-sm">View Applicants ({{ job.applicants?.length || 0 }})</a>
+        <a [routerLink]="'/jobs/' + job._id" class="btn btn-outline btn-sm">View Listing</a>
+        <button *ngIf="job.status === 'open'" class="btn btn-outline btn-sm" (click)="updateStatus(job, 'closed')">Close Job</button>
+        <button *ngIf="job.status === 'closed'" class="btn btn-outline btn-sm" (click)="updateStatus(job, 'open')">Reopen</button>
+        <button class="btn btn-danger btn-sm" (click)="confirmDelete = job._id">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete -->
+<div class="modal-overlay" *ngIf="confirmDelete" (click)="confirmDelete=null">
+  <div class="modal-box small" (click)="$event.stopPropagation()">
+    <div class="modal-header"><h3>Delete Job</h3><button class="modal-close" (click)="confirmDelete=null">×</button></div>
+    <div class="modal-body"><p>Are you sure you want to delete this job? This cannot be undone.</p></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="confirmDelete=null">Cancel</button>
+      <button class="btn btn-danger" (click)="deleteJob(confirmDelete!)">Delete</button>
+    </div>
+  </div>
+</div>

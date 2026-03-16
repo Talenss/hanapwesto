@@ -1,0 +1,92 @@
+<div class="jobs-page">
+  <!-- Filters Sidebar -->
+  <aside class="filters">
+    <h3>Filter Jobs</h3>
+    <div class="form-group">
+      <label class="form-label">Search</label>
+      <input type="text" class="form-control" [(ngModel)]="filters.search" placeholder="e.g. Carpenter" (keydown.enter)="search()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <select class="form-control" [(ngModel)]="filters.category" (change)="search()">
+        <option value="">All Categories</option>
+        <option *ngFor="let c of categories" [value]="c.value">{{c.label}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Barangay / Area</label>
+      <select class="form-control" [(ngModel)]="filters.barangay" (change)="search()">
+        <option value="">All Areas</option>
+        <option *ngFor="let b of barangays" [value]="b">{{b}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Pay Type</label>
+      <select class="form-control" [(ngModel)]="filters.payType" (change)="search()">
+        <option value="">Any</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+        <option value="fixed">Fixed Rate</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" style="width:100%" (click)="search()">Search Jobs</button>
+    <button class="btn btn-outline" style="width:100%;margin-top:8px" (click)="reset()">Reset Filters</button>
+
+    <div class="post-cta" *ngIf="!auth.isLoggedIn || auth.isEmployer">
+      <p>Are you an employer?</p>
+      <a routerLink="/employer/post-job" class="btn btn-accent" style="width:100%">+ Post a Job</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="jobs-main">
+    <div class="jobs-header">
+      <h1>Browse Jobs</h1>
+      <p *ngIf="!loading">{{ total }} job{{ total !== 1 ? 's' : '' }} found</p>
+    </div>
+
+    <div class="spinner" *ngIf="loading"></div>
+
+    <div class="empty-state" *ngIf="!loading && jobs.length === 0">
+      <span class="material-icons">work_off</span>
+      <p>No jobs found. Try adjusting your filters.</p>
+    </div>
+
+    <div class="jobs-grid" *ngIf="!loading && jobs.length > 0">
+      <a class="job-card" *ngFor="let job of jobs" [routerLink]="'/jobs/'+job._id">
+        <div class="jc-top">
+          <div class="jc-cat-icon">{{ getCategoryEmoji(job.category) }}</div>
+          <div class="jc-meta">
+            <h3>{{ job.title }}</h3>
+            <div class="jc-employer">
+              <div class="emp-av">{{ getInitial(getEmployerName(job.employer)) }}</div>
+              {{ getEmployerName(job.employer) }}
+            </div>
+          </div>
+          <div class="jc-status open">Open</div>
+        </div>
+        <div class="jc-info">
+          <span class="info-item">📍 {{ job.barangay }}</span>
+          <span class="info-item">⏱ {{ job.duration }}</span>
+          <span class="info-item">👥 {{ job.slots }} slot{{ job.slots > 1 ? 's' : '' }}</span>
+        </div>
+        <div class="jc-skills" *ngIf="job.skillsRequired?.length">
+          <span class="skill-tag" *ngFor="let s of job.skillsRequired.slice(0,3)">{{ s }}</span>
+        </div>
+        <div class="jc-footer">
+          <div class="jc-pay">₱{{ job.payAmount | number }}<span>/{{ job.payType }}</span></div>
+          <div class="jc-age">{{ job.createdAt | date:'MMM d' }}</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="pages > 1">
+      <button class="pag-btn" [disabled]="page===1" (click)="goPage(page-1)">‹ Prev</button>
+      <button class="pag-btn" *ngFor="let p of [].constructor(pages); let i=index"
+        [class.active]="page===i+1" (click)="goPage(i+1)">{{ i+1 }}</button>
+      <button class="pag-btn" [disabled]="page===pages" (click)="goPage(page+1)">Next ›</button>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,11 @@
+.notif-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; h1 { font-size:1.6rem; font-weight:800; color:#1B3A5C; } p { color:#6B7280; font-size:14px; margin-top:2px; } }
+.notif-list { display:flex; flex-direction:column; gap:4px; }
+.notif-item { display:flex; align-items:flex-start; gap:1rem; padding:1.2rem 1.5rem; background:#fff; border-radius:12px; cursor:pointer; transition:all .2s; border:1.5px solid #E5E7EB; position:relative; }
+.notif-item:hover { border-color:#1A9E8F; }
+.notif-item.unread { background:#EBF8FF; border-color:#BFDBFE; }
+.notif-icon { font-size:1.6rem; flex-shrink:0; line-height:1; }
+.notif-content { flex:1; }
+.notif-title { font-size:14px; font-weight:700; color:#1B3A5C; margin-bottom:3px; }
+.notif-msg { font-size:13px; color:#374151; margin-bottom:4px; }
+.notif-time { font-size:11px; color:#9CA3AF; }
+.unread-dot { width:10px; height:10px; border-radius:50%; background:#1A9E8F; flex-shrink:0; margin-top:4px; }

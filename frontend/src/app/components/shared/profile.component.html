@@ -1,0 +1,66 @@
+<div class="page-container" *ngIf="!loading && user">
+  <div class="profile-layout">
+    <div class="profile-card">
+      <div class="pc-avatar">{{ getInitial(user.name) }}</div>
+      <h1 class="pc-name">{{ user.businessName || user.name }}</h1>
+      <div class="pc-role badge" [class]="user.role === 'worker' ? 'badge-accent' : 'badge-primary'">
+        {{ user.role | titlecase }}
+      </div>
+      <div class="pc-loc">📍 {{ user.barangay }}, {{ user.municipality }}</div>
+      <div class="pc-rating" *ngIf="user.averageRating">
+        <span class="stars">{{ getStars(user.averageRating) }}</span>
+        <span>{{ user.averageRating }} average rating</span>
+      </div>
+      <div class="pc-stats">
+        <div class="pc-stat"><span>{{ user.completedJobs || 0 }}</span>Jobs Done</div>
+        <div class="pc-stat"><span>{{ user.totalRatings || 0 }}</span>Ratings</div>
+      </div>
+      <div class="pc-avail" *ngIf="user.role === 'worker' && user.availability">
+        Availability: <strong>{{ getAvailabilityLabel(user.availability) }}</strong>
+      </div>
+      <div class="pc-rate" *ngIf="user.role === 'worker' && user.dailyRate">
+        ₱{{ user.dailyRate }}/day
+      </div>
+    </div>
+
+    <div class="profile-details">
+      <div class="detail-card" *ngIf="user.bio">
+        <h3>About</h3>
+        <p>{{ user.bio }}</p>
+      </div>
+      <div class="detail-card" *ngIf="user.experience">
+        <h3>Experience</h3>
+        <p>{{ user.experience }}</p>
+      </div>
+      <div class="detail-card" *ngIf="user.skills?.length">
+        <h3>Skills</h3>
+        <div class="skills-grid">
+          <span class="skill-tag" *ngFor="let s of user.skills">{{ s }}</span>
+        </div>
+      </div>
+
+      <!-- Ratings -->
+      <div class="detail-card">
+        <h3>Ratings & Reviews ({{ ratings.length }})</h3>
+        <div class="empty-state" *ngIf="ratings.length === 0">
+          <span class="material-icons">star_border</span>
+          <p>No ratings yet</p>
+        </div>
+        <div class="ratings-list" *ngIf="ratings.length">
+          <div class="rating-item" *ngFor="let r of ratings">
+            <div class="ri-header">
+              <div class="ri-avatar">{{ getInitial(r.rater.name) }}</div>
+              <div>
+                <div class="ri-name">{{ r.rater.businessName || r.rater.name }}</div>
+                <div class="ri-date">{{ r.createdAt | date:'MMM d, y' }}</div>
+              </div>
+              <div class="ri-stars">{{ getStars(r.score) }}</div>
+            </div>
+            <p class="ri-comment" *ngIf="r.comment">"{{ r.comment }}"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="spinner" *ngIf="loading"></div>

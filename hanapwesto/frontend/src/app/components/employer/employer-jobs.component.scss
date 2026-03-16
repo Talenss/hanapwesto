@@ -1,0 +1,20 @@
+.jobs-list { display: flex; flex-direction: column; gap: 1rem; }
+.job-manage-card { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(27,58,92,.06); border: 1.5px solid #E5E7EB; }
+.jmc-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 12px; }
+.jmc-title-area h3 { font-size: 1.05rem; font-weight: 700; color: #1B3A5C; margin-bottom: 6px; }
+.jmc-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: #6B7280; align-items: center; }
+.jmc-status { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.status-open { background: #E6F9EF; color: #27AE60; }
+.status-filled { background: #EBF4FF; color: #1B3A5C; }
+.status-closed { background: #F3F4F6; color: #6B7280; }
+.status-in-progress { background: #FEF3DC; color: #B7791F; }
+.jmc-stats { display: flex; gap: 1.5rem; margin-bottom: 14px; padding: 10px 14px; background: #F9FAFB; border-radius: 10px; }
+.jmc-stat { font-size: 13px; color: #374151; font-weight: 500; }
+.jmc-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.modal-box { background: #fff; border-radius: 16px; width: 100%; max-width: 460px; box-shadow: 0 20px 60px rgba(0,0,0,.2); }
+.modal-box.small { max-width: 380px; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid #E5E7EB; h3 { font-size: 1.1rem; font-weight: 700; color: #1B3A5C; } }
+.modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #6B7280; }
+.modal-body { padding: 1.5rem; color: #374151; font-size: 15px; }
+.modal-footer { padding: 1rem 1.5rem 1.5rem; display: flex; gap: 10px; justify-content: flex-end; }
