@@ -16,7 +16,11 @@ Full-stack web app connecting informal workers with local employers in Pampanga,
 ```bash
 cd backend
 npm install
-cp .env.example .env   # Fill in your MongoDB URI and JWT secret
+cp .env.example .env   # Fill in your MongoDB URI and JWT secret (run this node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
+It instantly prints a secure random string like:
+```
+8f3a2c1e9b4d7f6a0e5c8b2d1a3f9e4c7b0d5a8e2f1c6b3d9a4e7f0c1b8d2a5)
 npm run dev            # Runs on http://localhost:5000
 ```
 
